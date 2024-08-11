@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+option go_package = "genproto/user";
+
+package user;
+
+service Users {
+    rpc Register(RegisterRequest)returns (RegisterResponse);
+    rpc Login(LoginRequest)returns(LoginResponse);
+    rpc Logout(LogoutRequest)returns(Message);
+    rpc GetUserProfile(ProfileRequest)returns(ProfileResponse);
+    rpc UpdateUserProfile(ProfileUpdateRequest)returns(ProfileUpdateResponse);
+    rpc ValidateToken(ValidateTokenRequest)returns(ValidateTokenResponse);
+    rpc RefreshToken(RefreshTokenRequest)returns(RefreshTokenResponse);
+    rpc DeleteUser(DeleteUserRequest) returns (Message);
+}
+
+message Void {}
+
+message LogoutRequest {
+    string token = 1;
+}
+
+message GetByUserIdRequest {
+    string id = 1;
+}
+
+message GetByUserIdResponse {
+    string id = 1;
+    string username = 2;
+    string email = 3;
+    string password = 4;
+    string fullname = 5;
+    string nativelanguage = 6;
+    string createdAt = 7;
+    string updatedAt = 8;
+}
+
+message DeleteUserRequest {
+    string user_id = 1;
+}
+
+
+message Message{
+    string message = 1;
+}
+
+message RegisterRequest{
+    string username = 1;
+    string email = 2;
+    string password = 3;
+    string role = 4;
+    string fullname =5;
+}
+message RegisterResponse{
+    string id = 1;
+    string username = 2;
+    string email = 3;
+    string password = 4;
+    string role = 5;
+    string fullname = 6;
+    string createdAt = 7;
+}
+
+message LoginRequest{
+    string email = 1;
+    string password = 2;
+}
+message LoginResponse{
+    string userId = 1;
+    string username = 2;
+    string role = 4;
+}
+
+message ProfileRequest {
+    string id = 1;
+
+}
+message ProfileResponse {
+    string username = 1;
+    string email = 2;
+    string fullname = 3;
+    string createdAt = 6;
+}   
+
+
+message ProfileUpdateRequest{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+    string username = 1;
+    string email = 2;
+}
+message ProfileUpdateResponse{
+    string id = 1;
+    string username = 2;
+    string email = 3;
+    string fullname = 4;
+    string updatedAt = 6;
+}
+
+message ValidateTokenRequest {
+    string token = 1;
+}
+
+message ValidateTokenResponse {
+    bool is_valid = 1;
+    string userId = 2;
+}
+message RefreshTokenRequest {
+    string refresh_token = 1;
+}
+
+message RefreshTokenResponse {
+    string new_token = 1;
+    string new_refresh_token = 2;
+}
